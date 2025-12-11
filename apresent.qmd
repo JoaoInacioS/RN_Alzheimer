@@ -1,0 +1,140 @@
+---
+title: "Análise Preditiva da Doença de Alzheimer"
+author: "João Inácio Scrimini"
+format:
+  revealjs:
+    theme: default
+---
+
+## Introdução {style="font-size:85%;"}
+
+- A Doença de Alzheimer é uma enfermidade neurodegenerativa caracterizada por declínio cognitivo progressivo e impacto significativo na qualidade de vida.
+- Com o crescimento da população idosa, a **detecção precoce** torna-se fundamental para intervenções mais eficazes.
+- Técnicas de **Machine Learning** ganham destaque por identificar padrões complexos em grandes volumes de dados clínicos.
+- Banco **Alzheimer’s Disease Dataset (Kaggle)**, contendo **2149 observações** de indivíduos ≥ 60 anos, com informações demográficas, clínicas e de estilo de vida.
+- **Objetivo**: desenvolver um modelo preditivo para estimar Alzheimer e apontar variáveis relevantes.
+
+
+------------------------------------------------------------------------
+
+## Variáveis Utilizadas {style="font-size:85%;"}
+
+-   **MMSE:** Avalia memória, atenção e raciocínio (0–30). Pontuações baixas indicam maior déficit cognitivo.
+
+-   **Avaliação Funcional:** Mede a autonomia em tarefas diárias (0–10). Valores menores = maior dificuldade funcional.
+
+-   **ADL:** Mede a capacidade de realizar atividades básicas (0–10). <br> <span style="font-size:80%;"><em>Pontuações menores indicam maior dependência.</em></span>
+
+-   **Queixas de Memória:** Indica se o paciente relata problemas de memória (0 = não, 1 = sim).
+
+-   **Problemas Comportamentais:** Registra alterações como irritabilidade ou agitação (0 = não, 1 = sim).
+
+
+-   **Diagnóstico:** 0 = sem Alzheimer, 1 = com Alzheimer. (0 = 1389 e 1 = 760)
+
+------------------------------------------------------------------------
+
+## Análise Descritiva {style="font-size:85%;"}
+
+Boxplots e Teste de Mann-Whitney para as variáveis quantitativas em relação ao diagnóstico de Alzheimer.
+
+![](imag/desc1.png){fig-align="center" width="95%"}
+
+------------------------------------------------------------------------
+
+## Análise Descritiva {style="font-size:85%;"}
+
+Percentual linha e teste de qui-quadrado de independência para variáveis qualitativas em relação ao diagnóstico de Alzheimer.
+
+![](imag/desc2.png){fig-align="center" width="95%"}
+
+------------------------------------------------------------------------
+
+## Divisão treino e teste {style="font-size:85%;"}
+
+![](imag/treino_teste.jpg){fig-align="center" width="95%"}
+
+------------------------------------------------------------------------
+
+## Modelo de Redes Neurais {style="font-size:85%;"}
+
+O modelo foi desenvolvido em **Python**, utilizando a biblioteca **Keras integrada ao TensorFlow**:
+
+-   Variáveis quantitativas **padronizadas** (média 0, DP 1).
+-   Arquitetura totalmente conectada:
+    -   Camadas ocultas com **ReLU,** favorecendo relações não lineares
+    -   Saída com **Sigmoid** (classificação binária)
+-   Compilação: Otimizador **Adam** + função de perda **Binary Crossentropy**.
+-   Treinamento com:
+    -   **Validação interna (30%)**
+    -   **Early Stopping** para evitar sobreajuste, interrompe após 3 épocas sem melhora na perda de validação.
+
+------------------------------------------------------------------------
+
+## Rede Neural {style="font-size:85%;"}
+
+Estrutura do modelo da rede neural totalmente conectada.
+
+![](imag/camadas.jpg){width="95%"}
+
+------------------------------------------------------------------------
+
+## Treinamento e Validação do Modelo {style="font-size:85%;"}
+
+Acurácia e perda no treinamento e validação do modelo.
+
+![](imag/epocas.png){fig-align="center" width="95%"}
+
+-   **42 épocas**, sem sobreajuste.
+
+------------------------------------------------------------------------
+
+## Validação Teste {style="font-size:85%;"}
+
+-   O desempenho foi avaliado por meio da **matriz de confusão** (corte 0.5):
+
+    ![](imag/mconf.png){fig-align="center" width="45%"}
+
+-   Métricas:
+
+    ::::: columns
+    ::: column
+    -   **Acurácia:** 91.63%
+    -   **Sensibilidade:** 89.04%
+    :::
+
+    ::: column
+    -   **Especificidade:** 93.05%
+    -   **Precisão:** 87.50%
+    :::
+    :::::
+
+------------------------------------------------------------------------
+
+## Conclusões {style="font-size:85%;"}
+
+-   Indivíduos com Alzheimer apresentaram pior desempenho em **MMSE**, **Avaliação Funcional** e **ADL**, além de maior frequência de **queixas de memória** e **problemas comportamentais**.
+-   O modelo de redes neurais mostrou bom desempenho, com alta acurácia, sensibilidade, especificidade e precisão, indicando baixo risco de erros.
+-   As variáveis selecionadas demonstraram relevância para caracterizar o quadro clínico dos pacientes.
+
+------------------------------------------------------------------------
+
+## Referências {style="font-size:85%;"}
+
+ - Rabie El Kharoua. Alzheimer’s Disease Dataset. Kaggle, 2024. Disponível em: <https://www.kaggle.com/dsv/86682> 79. Acesso em: 30 nov. 2025. Social Care Institute for Excellence.
+ 
+ - Early diagnosis of dementia. Disponível em: <https://www.scie.org.uk/dementia> /symptoms/diagnosis/early-diagnosis.asp. Acesso em: 30 nov. 2025.
+
+------------------------------------------------------------------------
+
+##  {style="font-size:100%; text-align:center;"}
+
+
+<div style="display:flex; align-items:center; justify-content:center; height:70vh; text-align:center; font-size:250%;">
+  <div style="font-weight:1000;">
+    Obrigado pela atenção!
+  </div>
+</div>
+
+
+
