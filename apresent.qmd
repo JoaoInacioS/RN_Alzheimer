@@ -1,9 +1,10 @@
 ---
-title: "Análise Preditiva da Doença de Alzheimer"
+title: "<span style='font-size:0.85em;'>Análise Preditiva da Doença de Alzheimer Baseada em Redes Neurais</span>"
 author: "João Inácio Scrimini"
 format:
   revealjs:
     theme: default
+    self-contained: true
 ---
 
 ## Introdução {style="font-size:85%;"}
